@@ -1,0 +1,57 @@
+2014.12.27 02:00:25 - [ERROR] - uo.ri.amp.business.impl.CommandExecutor.execute(): javax.persistence.PersistenceException: org.hibernate.exception.JDBCConnectionException: Cannot open connection
+	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1214)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1147)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.throwPersistenceException(AbstractEntityManagerImpl.java:1224)
+	at org.hibernate.ejb.TransactionImpl.begin(TransactionImpl.java:63)
+	at uo.ri.amp.business.impl.CommandExecutor.execute(CommandExecutor.java:25)
+	at uo.ri.amp.business.impl.AdminServiceImpl.ListMecanicos(AdminServiceImpl.java:85)
+	at uo.ri.amp.ui.admin.mecanicos.action.ListMecanicosAction.execute(ListMecanicosAction.java:32)
+	at alb.util.menu.BaseMenu.processOption(BaseMenu.java:52)
+	at alb.util.menu.BaseMenu.execute(BaseMenu.java:34)
+	at alb.util.menu.BaseMenu.processOption(BaseMenu.java:52)
+	at alb.util.menu.BaseMenu.execute(BaseMenu.java:34)
+	at alb.util.menu.BaseMenu.processOption(BaseMenu.java:52)
+	at alb.util.menu.BaseMenu.execute(BaseMenu.java:34)
+	at uo.ri.amp.ui.MainMenu.main(MainMenu.java:25)
+Caused by: org.hibernate.exception.JDBCConnectionException: Cannot open connection
+	at org.hibernate.exception.SQLStateConverter.convert(SQLStateConverter.java:99)
+	at org.hibernate.exception.JDBCExceptionHelper.convert(JDBCExceptionHelper.java:66)
+	at org.hibernate.exception.JDBCExceptionHelper.convert(JDBCExceptionHelper.java:52)
+	at org.hibernate.jdbc.ConnectionManager.openConnection(ConnectionManager.java:449)
+	at org.hibernate.jdbc.ConnectionManager.getConnection(ConnectionManager.java:167)
+	at org.hibernate.jdbc.JDBCContext.connection(JDBCContext.java:160)
+	at org.hibernate.transaction.JDBCTransaction.begin(JDBCTransaction.java:81)
+	at org.hibernate.impl.SessionImpl.beginTransaction(SessionImpl.java:1473)
+	at org.hibernate.ejb.TransactionImpl.begin(TransactionImpl.java:60)
+	... 10 more
+Caused by: java.sql.SQLTransientConnectionException: java.net.ConnectException: Connection refused: connect
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCConnection.<init>(Unknown Source)
+	at org.hsqldb.jdbc.JDBCDriver.getConnection(Unknown Source)
+	at org.hsqldb.jdbc.JDBCDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.hibernate.connection.DriverManagerConnectionProvider.getConnection(DriverManagerConnectionProvider.java:133)
+	at org.hibernate.jdbc.ConnectionManager.openConnection(ConnectionManager.java:446)
+	... 15 more
+Caused by: org.hsqldb.HsqlException: java.net.ConnectException: Connection refused: connect
+	at org.hsqldb.ClientConnection.openConnection(Unknown Source)
+	at org.hsqldb.ClientConnection.initConnection(Unknown Source)
+	at org.hsqldb.ClientConnection.<init>(Unknown Source)
+	... 22 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at org.hsqldb.server.HsqlSocketFactory.createSocket(Unknown Source)
+	... 25 more
+

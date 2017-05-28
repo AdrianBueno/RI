@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings 
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+  	version="2.0">
+	<!--  Contrato queries OK-->
+	<named-query name="Contrato.findByID">
+		<query>select c from Contrato c where c.id = ?1</query>
+	</named-query>
+	<named-query name="Contrato.findAll">
+		<query>select c from Contrato c</query>
+	</named-query>
+	<named-query name="Contrato.findEstado">
+		<query>select c from Contrato c where c.mecanico.id = ?1 AND c.estado = ?2</query>
+	</named-query>
+	<named-query name="Contrato.findAllActive">
+		<query>select c from Contrato c where c.estado like 'ACTIVO' </query>
+	</named-query>
+	<named-query name="Contrato.findByTipoContrato">
+		<query>select c from Contrato c where c.tipoContrato.id = ?1</query>
+	</named-query>
+	<named-query name="Contrato.findByCategoriaContrato">
+		<query>select c from Contrato c where c.categoriaContrato.id = ?1</query>
+	</named-query>
+	<named-query name="Contrato.findByMecanico">
+		<query>select c from Contrato c where c.mecanico.id = ?1</query>
+	</named-query>
+	
+	<!-- Mecanico queries OK-->
+	<named-query name="Mecanico.findByID">
+		<query>select m from Mecanico m where m.id = ?1</query>
+	</named-query>
+	<named-query name="Mecanico.findByDni">
+		<query>select m from Mecanico m where m.dni like ?1</query>
+	</named-query>
+	<named-query name="Mecanico.findAll">
+		<query>select m from Mecanico m</query>
+	</named-query>
+	<named-query name="Mecanico.findAllWitContrato">
+		<query>select c.mecanico from Contrato c where c.estado = uo.ri.amp.common.model.types.ContratoStatus.ACTIVO</query>
+	</named-query>
+	<named-query name="Mecanico.findByTipoContrato">
+		<query>select c.mecanico from Contrato c where c.tipoContrato.id = ?1</query>
+	</named-query>
+	<named-query name="Mecanico.findByCategoriaContrato">
+		<query>select c.mecanico from Contrato c where c.categoriaContrato.id = ?1</query>
+	</named-query>
+	
+	<!-- CategoriaContrato OK -->
+	<named-query name="CategoriaContrato.findById">
+		<query>select c from CategoriaContrato c where c.id = ?1</query>
+	</named-query>
+	<named-query name="CategoriaContrato.findByName">
+		<query>select c from CategoriaContrato c where c.nombre like ?1</query>
+	</named-query>
+	<named-query name="CategoriaContrato.findAll">
+		<query>select c from CategoriaContrato c</query>
+	</named-query>
+	
+	<!-- TipoContrato OK -->
+	<named-query name="TipoContrato.findById">
+		<query> select t from TipoContrato t where t.id = ?1</query>
+	</named-query>
+	<named-query name="TipoContrato.findByName">
+	<query> select t from TipoContrato t where t.nombre like ?1</query>
+	</named-query>
+	<named-query name="TipoContrato.findAll">
+	<query> select t from TipoContrato t</query>
+	</named-query>
+	
+	<!-- Nomina -->
+	<named-query name="Nomina.findById">
+		<query>select n from Nomina n where n.id = ?1</query>
+	</named-query>
+	<named-query name="Nomina.findByDate">
+		<query>select n from Nomina n where n.fecha = ?1</query>
+	</named-query>
+	<named-query name="Nomina.findByMecanicoAndDate">
+		<query>select n from Nomina n where n.contrato.mecanico.id = ?1 and n.fecha = ?2</query>
+	</named-query>
+	<named-query name="Nomina.findByContrato">
+		<query>select n from Nomina n where n.contrato.id = ?1</query>
+	</named-query>
+	<named-query name="Nomina.findAll">
+		<query>select n from Nomina n</query>
+	</named-query>
+	<named-query name="Nomina.findByMecanico">
+		<query>select n from Nomina n where n.contrato.mecanico.id = ?1</query>
+	</named-query>
+	<named-query name="Nomina.findByContratoLast">
+		<query>select n from Nomina n where n.contrato.id = ?1 and n.fecha = (select max(n.fecha) from Nomina n where n.contrato.id = ?1)</query>
+	</named-query>
+	
+	<!-- MedioPago queries -->
+	<named-query name="MedioPago.findByInvoiceId">
+		<query>select m  from Factura f join f.averias a join a.vehiculo.cliente c join c.mediosPago m where f.id = ?1</query>
+	</named-query>
+
+	<!-- Factura queries -->
+	<named-query name="Factura.findByNumber">
+		<query>select f from Factura f where f.numero = ?1</query>
+	</named-query>
+	
+	<named-query name="Factura.getNextInvoiceNumber">
+		<query>select max(f.numero) + 1 from Factura f</query>
+	</named-query>
+	
+	<!-- Averia quieries --> 
+	<named-query name="Averia.findByIds">
+		<query>select a from Averia a where a.id in (?1)</query>
+	</named-query>
+	
+	<named-query name="Averia.findAll">
+		<query>select a from Averia a</query>
+	</named-query>
+	<named-query name="Averia.findByDate">
+		<query>select a from Averia a where a.fecha BETWEEN ?1 and ?2</query>
+	</named-query>
+	<named-query name="Averia.findNoFacturadasByDni">
+		<query>select a from Averia a where a.vehiculo.cliente.dni = ?1 and a.status = uo.ri.amp.common.model.types.AveriaStatus.TERMINADA </query>
+	</named-query>
+<!-- 
+	<named-query name="findItemsOnSaleByCategoryId">
+		<query>
+			<![CDATA[
+			select i 
+				from Item i join i.categories c
+				where c.id = ?2
+					and i.startDate <= ?1
+					and i.endDate >= ?1 
+			]]>
+		</query>
+	</named-query>
+ -->		
+</entity-mappings>
