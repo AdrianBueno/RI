@@ -8,10 +8,10 @@ import uo.ri.amp.business.impl.AdminServiceImpl;
 
 /**
  * 
- * @author Adrián García Bueno UO232346
+ * @author 
  * @version 1
  * Esta clase se encarga de desacoplar una capa superior de la capa de negocio proporcionandole 
- * una clase implementación de una interfaz.
+ * una clase implementaciÃ³n de una interfaz.
  */
 public class BusinessFactory {
 	public static AdminService getAdminService(){
